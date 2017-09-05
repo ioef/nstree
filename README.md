@@ -5,7 +5,7 @@ A useful utility which shows an equivalent to sudo netstat -pant in a pstree lik
 usage: sudo ./nstree.py
 
 Example:
-sudo ./nstree.py 
+```sudo ./nstree.py 
 0.0.0.0---------+
                 |----> port:113        LISTEN PID:718 NAME:inetd
                 |----> port:445        LISTEN PID:1198 NAME:smbd
@@ -17,5 +17,5 @@ sudo ./nstree.py
                 |----> port:25         LISTEN PID:1928 NAME:exim4
                 |----> port:9050       LISTEN PID:883 NAME:tor
                 |----> port:3306       LISTEN PID:1414 NAME:mysqld
-
+```
 
