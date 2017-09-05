@@ -5,6 +5,19 @@ import os
 TCP = '/proc/net/tcp'
 UDP = '/proc/net/udp'
 
+State = {
+        '01':'ESTABLISHED',
+        '02':'SYN_SENT',
+        '03':'SYN_RECV',
+        '04':'FIN_WAIT1',
+        '05':'FIN_WAIT2',
+        '06':'TIME_WAIT',
+        '07':'CLOSE',
+        '08':'CLOSE_WAIT',
+        '09':'LAST_ACK',
+        '0A':'LISTEN',
+        '0B':'CLOSING'
+        } 
 
 def convHex2Dec(stringNum):
     #convert string Number provided to HEX
@@ -45,14 +58,19 @@ for line in tcpData:
     #remove empty strings
     line = [x for x in line if x!='']
     
+    print line 
+
     #Local IP and Port
     lhost = getSocket(line[1])[0]
     lport = getSocket(line[1])[1]
 
+    state = State[line[3]]
+
+    datList = [lport,state]
     if lhost in netstat:
-        netstat[lhost].append(lport)
+        netstat[lhost].append(datList)
     else:
-        netstat[lhost] = [lport]
+        netstat[lhost] = [[datList]]
 
     #Remote IP and Port
 #    rhost = getSocket(line[2])[0]
@@ -65,5 +83,5 @@ for line in tcpData:
 for k, v in netstat.items():
     print k.ljust(16,'-') + '+'
     for item in v:
-        print ' '.ljust(16)+ '|----'+ item
+        print ' '.ljust(16)+ '|----'+ str(item)
         
