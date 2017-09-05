@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import sys
 
 TCP = '/proc/net/tcp'
 UDP = '/proc/net/udp'
@@ -91,6 +92,12 @@ def getprocessName(pid):
         with open(path, 'r') as cmdFile:
             return cmdFile.read().strip('\n')
     return None
+
+
+
+if not os.geteuid() == 0:
+        sys.exit('Become root and try again!\nExiting...')
+
 
 tcpData = fetchData()
 
