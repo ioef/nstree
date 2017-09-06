@@ -91,7 +91,7 @@ def getprocessName(pid):
         path = '/proc/' + pid + '/comm'
         with open(path, 'r') as cmdFile:
             return cmdFile.read().strip('\n')
-    return None
+    return ''
 
 
 
